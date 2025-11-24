@@ -26,11 +26,11 @@ public class MovieValidator {
 
         String expectedLetters = extractCapitalLetters(title);
 
-        if (!movieId.startsWith(expectedLetters)) {
+        String numbersPart = movieId.substring(expectedLetters.length());
+
+        if (!movieId.startsWith(expectedLetters) || Character.isLetter(numbersPart.charAt(0))) {
             throw new MovieIdLettersException(movieId);
         }
-
-        String numbersPart = movieId.substring(expectedLetters.length());
 
         if (numbersPart.length() != 3) {
             throw new MovieIdNumbersException(movieId);

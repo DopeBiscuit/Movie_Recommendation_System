@@ -35,8 +35,8 @@ public class UserParser {
             String name = nameIdParts[0].trim();
             String id = nameIdParts[1].trim();
 
-            validator.validateUserName(name);
-            validator.validateUserId(id);
+            validator.validateUserName(nameIdParts[0]);
+            validator.validateUserId(nameIdParts[1]);
             validator.validateUniqueUserId(id, userIds);
             userIds.add(id);
 
