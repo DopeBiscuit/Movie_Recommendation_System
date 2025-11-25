@@ -1,6 +1,6 @@
-# 🎬 CineMatch - Intelligent Movie Recommendation System
-
 <div align="center">
+    
+<img width="3264" height="1312" alt="Gemini_Generated_Image_maflxhmaflxhmafl" src="https://github.com/user-attachments/assets/dc4c391b-6f07-46a4-ad3d-651912918d07" />
 
 ![Java](https://img.shields.io/badge/Java-11+-orange?style=for-the-badge&logo=java)
 ![JUnit](https://img.shields.io/badge/JUnit-5.9.3-green?style=for-the-badge&logo=junit5)
