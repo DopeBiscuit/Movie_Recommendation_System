@@ -28,7 +28,8 @@ public class MovieValidator {
 
         String numbersPart = movieId.substring(expectedLetters.length());
 
-        if (!movieId.startsWith(expectedLetters) || Character.isLetter(numbersPart.charAt(0))) {
+        if (!movieId.startsWith(expectedLetters) ||
+                (!numbersPart.isEmpty() && Character.isLetter(numbersPart.charAt(0)))) {
             throw new MovieIdLettersException(movieId);
         }
 
