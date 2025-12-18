@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class MovieValidator {
-
+    private Set<String> existingMovieIds = new HashSet<>();
     public void validateTitle(String title) throws MovieTitleException {
         if (title == null || title.trim().isEmpty()) {
             throw new MovieTitleException(title);
@@ -46,6 +46,9 @@ public class MovieValidator {
         if (!areDigitsUnique(numbersPart)) {
             throw new MovieIdNumbersException(movieId);
         }
+        else  {
+            existingMovieIds.add(movieId);
+        }
     }
 
     private String extractCapitalLetters(String title) {
@@ -59,12 +62,6 @@ public class MovieValidator {
     }
 
     private boolean areDigitsUnique(String numbers) {
-        Set<Character> seen = new HashSet<>();
-        for (char c : numbers.toCharArray()) {
-            if (!seen.add(c)) {
-                return false;
-            }
-        }
-        return true;
+        return !existingMovieIds.contains(numbers);
     }
 }
