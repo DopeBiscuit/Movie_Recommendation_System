@@ -9,12 +9,21 @@ import exceptions.ValidationException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class MovieRecommendationApp {
 
     public static void main(String[] args) {
-        String moviesFile = "movies.txt";
-        String usersFile = "users.txt";
+    	
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the movies file path: ");
+        String moviesFile = scanner.nextLine().trim();
+                                                           // edit to make user enter the name of wanted in execution time 
+        System.out.print("Enter the users file path: "); 
+        String usersFile = scanner.nextLine().trim();
+        scanner.close();
+        
         String outputFile = "recommendations.txt";
 
         RecommendationWriter writer = new RecommendationWriter();
