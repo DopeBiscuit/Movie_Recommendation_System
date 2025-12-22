@@ -8,6 +8,8 @@ import java.util.HashSet;
 
 public class MovieValidator {
 
+    private Set<String> existingMovieIds = new HashSet<>();
+
     public void validateTitle(String title) throws MovieTitleException {
         if (title == null || title.trim().isEmpty()) {
             throw new MovieTitleException(title);
@@ -43,8 +45,11 @@ public class MovieValidator {
             }
         }
 
-        if (!areDigitsUnique(numbersPart)) {
+        if (existingMovieIds.contains(movieId)) {
             throw new MovieIdNumbersException(movieId);
+        }
+        else {
+            existingMovieIds.add(movieId);
         }
     }
 
@@ -56,15 +61,5 @@ public class MovieValidator {
             }
         }
         return capitals.toString();
-    }
-
-    private boolean areDigitsUnique(String numbers) {
-        Set<Character> seen = new HashSet<>();
-        for (char c : numbers.toCharArray()) {
-            if (!seen.add(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 }
