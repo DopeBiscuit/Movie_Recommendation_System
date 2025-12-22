@@ -81,7 +81,7 @@ public class MovieParserTest {
     }
 
     @Test
-    public void testParseMovies_InvalidTitle_Lowercase() {
+    public void testParseMovies_InvalidTitle_Lowercase() throws Exception{
         createTestFile(
                 "the dark knight,TDK123",
                 "action,thriller"
@@ -92,7 +92,7 @@ public class MovieParserTest {
     }
 
     @Test
-    public void testParseMovies_InvalidMovieId_WrongLetters() {
+    public void testParseMovies_InvalidMovieId_WrongLetters() throws Exception {
         createTestFile(
                 "The Dark Knight,ABC123",
                 "action,thriller"
@@ -103,7 +103,7 @@ public class MovieParserTest {
     }
 
     @Test
-    public void testParseMovies_InvalidMovieId_NonUniqueNumbers() {
+    public void testParseMovies_InvalidMovieId_NonUniqueNumbers()throws Exception {
         createTestFile(
                 "The Dark Knight,TDK111",
                 "action,thriller"
@@ -114,7 +114,7 @@ public class MovieParserTest {
     }
 
     @Test
-    public void testParseMovies_MissingGenresLine() {
+    public void testParseMovies_MissingGenresLine() throws Exception{
         createTestFile(
                 "The Dark Knight,TDK123"
         );
@@ -123,8 +123,10 @@ public class MovieParserTest {
                 () -> parser.parseMovies(testFile));
     }
 
+    
+
     @Test
-    public void testParseMovies_InvalidFormat_NoComma() {
+    public void testParseMovies_InvalidFormat_NoComma()throws Exception {
         createTestFile(
                 "The Dark Knight TDK123",
                 "action,thriller"
@@ -159,7 +161,7 @@ public class MovieParserTest {
     }
 
     @Test
-    public void testParseMovies_ErrorInSecondMovie() {
+    public void testParseMovies_ErrorInSecondMovie() throws Exception{
         createTestFile(
                 "The Dark Knight,TDK123",
                 "action,thriller",
@@ -185,16 +187,17 @@ public class MovieParserTest {
     }
 
     // Helper method to create test file
-    private void createTestFile(String... lines) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(testFile));
-            for (String line : lines) {
-                writer.write(line);
-                writer.newLine();
-            }
-            writer.close();
-        } catch (IOException e) {
-            fail("Failed to create test file: " + e.getMessage());
+    private void createTestFile(String... lines) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(testFile));
+        for (String line : lines) {
+            writer.write(line);
+            writer.newLine();
         }
+        writer.close();
+    }
+    @Test
+    public void testParseMovies_FileNotFound() {
+        assertThrows(IOException.class, 
+            () -> parser.parseMovies("does_not_exist.txt"));
     }
 }
