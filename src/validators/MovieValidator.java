@@ -45,11 +45,11 @@ public class MovieValidator {
             }
         }
 
-        if (existingMovieIds.contains(movieId)) {
+        if (existingMovieIds.contains(numbersPart)) {
             throw new MovieIdNumbersException(movieId);
         }
         else {
-            existingMovieIds.add(movieId);
+            existingMovieIds.add(numbersPart);
         }
     }
 
